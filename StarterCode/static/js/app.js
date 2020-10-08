@@ -9,21 +9,6 @@
 //     });
 //     // charts(names[0])
 
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // });
 
 // // function optionChanged(newname) {
@@ -49,13 +34,36 @@ function init() {
         ids.forEach(id => {
         dropdownMenu.append('option').text(id)  
         });
-        // charts(ids[0])
         
-      // Use the first subject ID from the names to build initial plots
-      const firstSubject = ids[0];
-      updateCharts(firstSubject);
-      updateMetadata(firstSubject);
+      // Use the first ID from the names to build initial plots
+        charts(ids[0])
     });
+
+    
+        function optionChanged(newid) {
+        charts(newid)
+        };
+
+        function charts(id) {
+        d3.json("samples.json").then(function(data){
+        var samples = data.samples
+        // console.log(samples)
+        
+
+
+        })
+    };
+
+
+
+
+
+
+
+
+
+
+
   }
   
   
