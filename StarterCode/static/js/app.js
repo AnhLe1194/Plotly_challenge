@@ -28,31 +28,19 @@ function updateMetadata(sample) {
             metaPanel.append("h6").text(`${key}: ${value}`)
         })
     
-  // Data for Gauge Chart
-    var data = [
+  // Data for Gauge Chart 
+    // Layout for Gauge Chart
+     var data = [
       {
         domain: { x: [0, 1], y: [0, 1] },
-        marker: {size: 28, color:'850000'},
         value: result.wfreq,
-        title: 'Belly Button Washing Frequency<br> Scrubs per Week',
-        titlefont: {family: '"Palatino Linotype", "Book Antiqua", Palatino, serif'},
+        title: 'Belly Button Washing Frequency Scrubs per Week',
         type: "indicator",
         mode: "gauge+number"
       }
     ];
-    // Layout for Gauge Chart
-  
-    var layout = {
-      width: 450,
-       height: 400,
-       margin: { t: 25, r: 25, l: 25, b: 25 },
-       line: {
-       color: '600000'
-       },
-       paper_bgcolor: "#a5bdc6",
-       font: { color: "#85541d", family: "Serif" }
-     };
-  
+    
+    var layout = { width: 600, height: 500, margin: { t: 0, b: 0 } };
     
     Plotly.newPlot("gauge", data, layout);
   // Use `Object.entries` to add each key and value pair to the metaPanel
@@ -68,7 +56,8 @@ function updateCharts(sample) {
     var result = filterArray[0];
     var sample_values = result.sample_values;
     var otu_ids = result.otu_ids;
-    var otu_labels = result.otu_labels;   
+    var otu_labels = result.otu_labels; 
+
     // Bubble Chart
     var trace1 = {
         x: otu_ids,
@@ -81,7 +70,9 @@ function updateCharts(sample) {
         colorscale:"Electric"
         }
     };
+
     var data = [trace1];
+
     var layout = {
         title: 'Bacteria Cultures per Sample',
         showlegend: false,
@@ -89,7 +80,9 @@ function updateCharts(sample) {
         xaxis: {title:"OTU (Operational Taxonomic Unit) ID " +sample},
         margin: {t:30}
     };
+
     Plotly.newPlot('bubble', data, layout); 
+
     // Bar Chart
     var trace1 = {
         x: sample_values.slice(0,10).reverse(),
@@ -99,7 +92,10 @@ function updateCharts(sample) {
         type: "bar",
         orientation: "h"
     };
+
+
     var data = [trace1];
+
     var layout = {
         title: "Top Ten OTUs for Individual " +sample,
         margin: {l: 100, r: 100, t: 100, b: 100}
