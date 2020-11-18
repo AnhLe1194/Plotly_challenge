@@ -12,7 +12,7 @@ function init() {
         
       // Use the first ID from the names to build initial plots
       const firstid = ids[0];
-      updateCharts(firstid);
+      updatecharts(firstid);
       updatetable(firstid);
     });
 }
@@ -22,30 +22,15 @@ function updatetable(sample) {
         var metadata = data.metadata;
         var filterArray = metadata.filter(sampleObject => sampleObject.id == sample);
         var result = filterArray[0];
-
-        {
-          var table = d3.select("#sample-metadata");
-          var tbody = table.select("tbody");
-          var trow;
-          for (var i = 0; i < 12; i++) {
-            trow = tbody.append("tr");
-            trow.append("td").text(dates[i]);
-            trow.append("td").text(openPrices[i]);
-            trow.append("td").text(highPrices[i]);
-            trow.append("td").text(lowPrices[i]);
-            trow.append("td").text(closingPrices[i]);
-            trow.append("td").text(volume[i]);
-          }
-        }
-        
-        var table = d3.select("#");
+        var table = d3.select("#sample-metadata");
         table.html("");
         Object.entries(result).forEach(([key, value]) => {
-            table.append("h6").text(`${key}: ${value}`)
+            var cell = table.append("h6")
+            cell.text(`${key}: ${value}`)
         })
     
-  
-  // Layout for Gauge Chart
+//  Gauge Chart 
+
      var data = [
       {
         domain: { x: [0, 1], y: [0, 1] },
@@ -56,13 +41,13 @@ function updatetable(sample) {
       }
     ];
     
-    var layout = { width: 500, height: 400, margin: { t: 0, b: 0 } };
+    var layout = { width: 500, height: 400, margin: { t: 1, b: 0 } };
     
     Plotly.newPlot("gauge", data, layout);
     });
 }
 
-function updateCharts(sample) {    
+function updatecharts(sample) {    
     d3.json("samples.json").then((data) => {
     var samples = data.samples;
     var filterArray = samples.filter(sampleObject => sampleObject.id == sample);
@@ -99,7 +84,7 @@ function updateCharts(sample) {
     // Bar Chart
   var trace1 = {
         x: sample_values.slice(0,10).reverse(),
-        y: otu_ids.slice(0,10).map(otuID => `OTU ${otuID}`).reverse(),
+        y: otu_ids.slice(0,10).map(otuID => `OTU${otuID}`).reverse(),
         text: otu_labels.slice(0,10).reverse(),
         name: "Greek",
         type: "bar",
@@ -110,7 +95,7 @@ function updateCharts(sample) {
 
   var layout = {
         title: "Top Ten OTUs for Individual " +sample,
-        margin: {l: 100, r: 100, t: 100, b: 100}
+        margin: {l: 150, r: 50, t: 50, b: 100}
   };
 
   Plotly.newPlot("bar", data, layout);  
@@ -119,8 +104,8 @@ function updateCharts(sample) {
 }
 
 function optionChanged(newid) {
-    updateCharts(newid);
-    updateMetadata(newid);
+    updatecharts(newid);
+    updatetable(newid);
 }
     
 init();
