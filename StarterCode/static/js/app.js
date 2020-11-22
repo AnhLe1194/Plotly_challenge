@@ -69,7 +69,7 @@ function updatecharts(sample) {
         marker: {
         size: sample_values,
         color: otu_ids,
-        colorscale:"Electric"
+        colorscale: "Electric"
         }
     };
 
@@ -96,7 +96,7 @@ function updatecharts(sample) {
 
   var trace1 = {
         x: sample_values.slice(0,10).reverse(),
-        y: otu_ids.slice(0,10).map(otuID => `OTU${otuID}`).reverse(),
+        y: otu_ids.slice(0,10).map(otu_id => `OTU${otu_id}`).reverse(),
         text: otu_labels.slice(0,10).reverse(),
         name: "Greek",
         type: "bar",
@@ -109,8 +109,8 @@ function updatecharts(sample) {
         title: "Top Ten OTUs for Individual " +sample,
         margin: {
         l: 150, 
-        r: 50, 
-        t: 50, 
+        r: 100, 
+        t: 100, 
         b: 100
       }
   };
