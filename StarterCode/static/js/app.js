@@ -85,7 +85,15 @@ function updatecharts(sample) {
 
     Plotly.newPlot('bubble', data, layout); 
 
-    // Bar Chart
+  // Bar Chart
+
+// slicedata_1 = sample_values.slice(0,10);
+// slicedata_2 = otu_ids.slice(0,10);
+
+// reversedData_1 = slicedata_1.reverse();
+// reversedData_2 = slicedata_2.reverse();
+
+
   var trace1 = {
         x: sample_values.slice(0,10).reverse(),
         y: otu_ids.slice(0,10).map(otuID => `OTU${otuID}`).reverse(),
@@ -99,7 +107,12 @@ function updatecharts(sample) {
 
   var layout = {
         title: "Top Ten OTUs for Individual " +sample,
-        margin: {l: 150, r: 50, t: 50, b: 100}
+        margin: {
+        l: 150, 
+        r: 50, 
+        t: 50, 
+        b: 100
+      }
   };
 
   Plotly.newPlot("bar", data, layout);  
