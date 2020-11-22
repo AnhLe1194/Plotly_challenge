@@ -6,17 +6,17 @@ function init() {
         // Select the dropdown element
         var dropdownMenu = d3.select("#selDataset");
         var ids = data.names
-        ids.forEach(id => {
         
-            var dropdownid = dropdownMenu.append('option')
-            dropdownid.text(id)
-
-        });
+        for (var j = 0; j < ids.length; j++) {
+          var dropdownid = dropdownMenu.append('option')
+          dropdownid.text(ids[j])
+        };
         
       // Use the first ID from the names to build initial plots
       const firstid = ids[0];
       updatecharts(firstid);
       updatetable(firstid);
+
     });
 }
 
@@ -27,6 +27,7 @@ function updatetable(sample) {
         var result = filterArray[0];
         var table = d3.select("#sample-metadata");
         table.html("");
+        
         Object.entries(result).forEach(([key, value]) => {
             var cell = table.append("h6")
             cell.text(`${key}: ${value}`)
