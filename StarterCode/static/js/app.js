@@ -7,7 +7,10 @@ function init() {
         var dropdownMenu = d3.select("#selDataset");
         var ids = data.names
         ids.forEach(id => {
-        dropdownMenu.append('option').text(id)  
+        
+            var dropdownid = dropdownMenu.append('option')
+            dropdownid.text(id)
+
         });
         
       // Use the first ID from the names to build initial plots
